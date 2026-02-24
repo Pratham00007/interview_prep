@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>PrepEdge — AI Interview Platform</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css">
+
+  </head>
+  <body>
+    <div class="loading-overlay" id="loader">
+      <div
+        class="loading-logo"
+        style="
+          background: linear-gradient(135deg, #3b82f6, #818cf8);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        "
+      >
+        Prep<span style="-webkit-text-fill-color: var(--gold)">Edge</span>
+      </div>
+      <div style="color: var(--muted); font-size: 0.85rem">
+        Loading AI Interview Platform...
+      </div>
+      <div class="loading-bar"><div class="loading-fill"></div></div>
+    </div>
+
+    <nav id="navbar">
+      <div class="logo" onclick="goPage('home')">Prep<em>Edge</em></div>
+      <div id="nav-links"></div>
+    </nav>
+
+    <!-- HOME -->
+    <div class="page active" id="pg-home">
+      <div class="hero">
+        <div class="badge">
+          🚀 India's #1 AI-Powered Interview Prep Platform
+        </div>
+        <h1>
+          Crack Your Dream<br /><span class="grad">Company Interview</span>
+        </h1>
+        <p>
+          Practice with an AI HR avatar, record voice answers as WAV, get
+          AI-scored feedback, and read real employee insights from your target
+          companies.
+        </p>
+        <div class="hero-btns">
+          <button
+            class="btn btn-primary btn-lg"
+            onclick="openModal('register')"
+          >
+            Get Started Free
+          </button>
+          <button
+            class="btn btn-outline btn-lg"
+            onclick="requireLogin(showCompanies)"
+          >
+            Browse Companies
+          </button>
+        </div>
+      </div>
+      <div class="stats-bar">
+        <div class="stat">
+          <div class="stat-n">500+</div>
+          <div class="stat-l">Companies Listed</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">2L+</div>
+          <div class="stat-l">Students Registered</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">AI Powered</div>
+          <div class="stat-l">Dynamic Questions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">85%</div>
+          <div class="stat-l">Selection Rate</div>
+        </div>
+      </div>
+      <div class="feat-sec">
+        <div class="sec-title">Everything you need to get placed</div>
+        <div class="sec-sub">
+          From mock interviews to employee insights — powered by Gemini AI
+        </div>
+        <div class="feat-grid">
+          <div class="feat-card">
+            <div class="feat-icon">🎙️</div>
+            <div class="feat-title">Voice HR Interview</div>
+            <div class="feat-desc">
+              Record answers as WAV audio. AI HR avatar speaks questions aloud
+              for a real interview feel.
+            </div>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon">🤖</div>
+            <div class="feat-title">AI Feedback & Scoring</div>
+            <div class="feat-desc">
+              Every answer scored 0–100 by Gemini with specific strengths,
+              improvements, and a model answer.
+            </div>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon">⏱️</div>
+            <div class="feat-title">Time Analytics</div>
+            <div class="feat-desc">
+              Track time per question. Know exactly where you slow down and
+              which topics need more focus.
+            </div>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon">🗺️</div>
+            <div class="feat-title">Full Prep Roadmap</div>
+            <div class="feat-desc">
+              Level-wise LeetCode, GFG, HackerRank links + YouTube tutorials
+              curated per company and topic.
+            </div>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon">🧠</div>
+            <div class="feat-title">Dynamic Questions</div>
+            <div class="feat-desc">
+              Gemini generates fresh, level-appropriate questions every session.
+              No two sessions are the same.
+            </div>
+          </div>
+          <div class="feat-card">
+            <div class="feat-icon">📝</div>
+            <div class="feat-title">Company Blogs</div>
+            <div class="feat-desc">
+              Real employee insights about work culture, team life, and what
+              happens after you join.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPANIES -->
+    <div class="page" id="pg-companies">
+      <div class="pw">
+        <div class="sec-title">Company Directory</div>
+        <div class="sec-sub">
+          Browse companies, prep roadmaps, and apply directly
+        </div>
+        <div class="search-row">
+          <input
+            type="text"
+            id="co-search"
+            placeholder="🔍  Search companies or roles..."
+            oninput="renderCompanies()"
+          />
+          <button class="fbtn on" data-f="all" onclick="setFilter(this)">
+            All
+          </button>
+          <button class="fbtn" data-f="product" onclick="setFilter(this)">
+            Product
+          </button>
+          <button class="fbtn" data-f="service" onclick="setFilter(this)">
+            Service
+          </button>
+          <button class="fbtn" data-f="startup" onclick="setFilter(this)">
+            Startup
+          </button>
+        </div>
+        <div class="co-grid" id="co-grid"></div>
+      </div>
+    </div>
+
+    <!-- COMPANY DETAIL -->
+    <div class="page" id="pg-company">
+      <div class="co-hdr"><div class="co-hdr-in" id="co-hdr-in"></div></div>
+      <div class="tab-bar" id="co-tabs">
+        <button class="tb on" onclick="doTab('overview', this)">
+          Overview
+        </button>
+        <button class="tb" onclick="doTab('rounds', this)">
+          Interview Rounds
+        </button>
+        <button class="tb" onclick="doTab('roadmap', this)">
+          🗺️ Prep Roadmap
+        </button>
+        <button class="tb" onclick="doTab('prep', this)">Resources</button>
+        <button class="tb" onclick="doTab('apply', this)">Apply Now</button>
+      </div>
+      <div class="tp on" id="tp-overview">
+        <div class="pw" id="ov-body"></div>
+      </div>
+      <div class="tp" id="tp-rounds">
+        <div class="pw">
+          <div class="sec-title">Interview Rounds</div>
+          <div class="sec-sub">
+            Round-wise breakdown with level-specific practice links
+          </div>
+          <div class="rg" id="rg-body"></div>
+        </div>
+      </div>
+      <div class="tp" id="tp-roadmap"><div class="pw" id="rm-body"></div></div>
+      <div class="tp" id="tp-prep"><div class="pw" id="pr-body"></div></div>
+      <div class="tp" id="tp-apply"><div class="pw" id="ap-body"></div></div>
+    </div>
+
+    <!-- ROUND DETAIL -->
+    <div class="page" id="pg-round"><div class="pw" id="rd-body"></div></div>
+
+    <!-- MOCK INTERVIEW (aptitude/technical) -->
+    <div class="page" id="pg-mock"><div class="pw" id="mock-body"></div></div>
+
+    <!-- HR INTERVIEW -->
+    <div class="page" id="pg-hr"><div class="pw" id="hr-body"></div></div>
+
+    <!-- DASHBOARD -->
+    <div class="page" id="pg-dashboard">
+      <div class="dash-hdr">
+        <div class="dash-in">
+          <div class="dash-name" id="dash-name">Welcome back! 👋</div>
+          <div class="dash-sub">Your personalized preparation hub</div>
+          <div class="prog-wrap">
+            <div class="prog-labels">
+              <span>Overall Readiness</span><span id="rpct">0%</span>
+            </div>
+            <div class="prog-bar">
+              <div class="prog-fill" id="rfill" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="info-strip" id="info-strip"></div>
+      <div class="pw">
+        <div
+          style="
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+          "
+        >
+          <button
+            class="btn btn-gold btn-lg"
+            onclick="
+              goPage('hr');
+              startHRInterview();
+            "
+          >
+            🎙️ Start HR Interview
+          </button>
+          <button
+            class="btn btn-primary"
+            onclick="
+              goPage('blog');
+              renderBlog();
+            "
+          >
+            📝 Company Blogs
+          </button>
+          <button class="btn btn-outline" onclick="showAnalytics()">
+            📊 My Analytics
+          </button>
+          <button class="btn btn-outline" onclick="openModal('feedback')">
+            💬 Feedback
+          </button>
+        </div>
+        <div class="sec-title" style="margin-top: 0.5rem">
+          Recommended Companies
+        </div>
+        <div class="sec-sub">Based on your role and experience level</div>
+        <div class="co-grid" id="dash-grid"></div>
+        <div
+          id="analytics-section"
+          style="display: none; margin-top: 2rem"
+        ></div>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <div class="page" id="pg-blog">
+      <div class="pw">
+        <button
+          class="btn btn-outline btn-sm"
+          onclick="goPage('dashboard')"
+          style="margin-bottom: 1rem"
+        >
+          ← Dashboard
+        </button>
+        <div class="sec-title">Employee Insights</div>
+        <div class="sec-sub">
+          Real stories from people working inside your target companies
+        </div>
+        <div class="search-row">
+          <input
+            type="text"
+            id="blog-search"
+            placeholder="🔍 Search by company or topic..."
+            oninput="renderBlog()"
+          />
+          <button class="fbtn on" data-bf="all" onclick="setBlogFilter(this)">
+            All
+          </button>
+          <button class="fbtn" data-bf="culture" onclick="setBlogFilter(this)">
+            Culture
+          </button>
+          <button class="fbtn" data-bf="work" onclick="setBlogFilter(this)">
+            Work Life
+          </button>
+          <button class="fbtn" data-bf="growth" onclick="setBlogFilter(this)">
+            Growth
+          </button>
+        </div>
+        <div class="blog-grid" id="blog-grid"></div>
+      </div>
+    </div>
+
+    <!-- BLOG POST -->
+    <div class="page" id="pg-blogpost">
+      <div class="pw" id="blogpost-body"></div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast"></div>
+
+    <!-- ANTI-CHEAT BANNER -->
+    <div id="anticheat-banner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:1500;background:rgba(239,68,68,0.12);border-bottom:1px solid rgba(239,68,68,0.3);padding:.45rem 1.5rem;align-items:center;gap:.75rem;font-size:.78rem;color:#ef4444;font-weight:600;backdrop-filter:blur(10px)">
+      <span>🔴 INTERVIEW IN PROGRESS</span>
+      <span style="color:var(--muted);font-weight:400">Tab switching is monitored · Stay in fullscreen · Camera &amp; mic active</span>
+      <button onclick="exitInterview()" style="margin-left:auto;background:none;border:1px solid rgba(239,68,68,0.4);color:#ef4444;padding:.25rem .75rem;border-radius:5px;cursor:pointer;font-size:.75rem;font-family:Manrope,sans-serif">Exit Interview</button>
+    </div>
+
+    <!-- FULLSCREEN WARNING -->
+    <div id="fullscreen-warning" style="display:none;position:fixed;inset:0;z-index:9998;background:rgba(6,13,27,0.97);align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;text-align:center;padding:2rem">
+      <div style="font-size:3rem">⚠️</div>
+      <div style="font-family:Syne,sans-serif;font-size:1.6rem;font-weight:800;color:var(--red)">Fullscreen Exited!</div>
+      <p style="color:var(--muted);max-width:420px;line-height:1.7">Interview sessions must be conducted in fullscreen mode to prevent cheating. Please return to fullscreen to continue your test.</p>
+      <button class="btn btn-primary btn-lg" onclick="resumeFullscreen()">🔁 Return to Fullscreen</button>
+      <button onclick="exitInterview()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;text-decoration:underline">Exit Interview Instead</button>
+    </div>
+
+    <!-- TAB SWITCH WARNING -->
+    <div id="tab-warning-modal" style="display:none;position:fixed;inset:0;z-index:9997;background:rgba(6,13,27,0.97);align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;text-align:center;padding:2rem">
+      <div style="font-size:3rem">👁️</div>
+      <div style="font-family:Syne,sans-serif;font-size:1.6rem;font-weight:800;color:var(--gold)">Tab Switch Detected!</div>
+      <p style="color:var(--muted);max-width:420px;line-height:1.7">You switched to another tab. This is recorded. Switches detected: <strong style="color:var(--red)" id="tab-warning-count">1</strong>. Continuing to switch tabs may invalidate your test result.</p>
+      <button class="btn btn-primary btn-lg" onclick="resumeFullscreen()">✅ Resume Interview</button>
+      <button onclick="exitInterview()" style="background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;text-decoration:underline">Exit Interview</button>
+    </div>
+
+    <!-- MIC PERMISSION MODAL -->
+    <div id="mic-permission-modal" style="display:none;position:fixed;inset:0;z-index:9996;background:rgba(6,13,27,0.92);align-items:center;justify-content:center;flex-direction:column;gap:1.5rem;text-align:center;padding:2rem">
+      <div style="font-size:3rem">🎙️</div>
+      <div style="font-family:Syne,sans-serif;font-size:1.5rem;font-weight:800">Microphone Required</div>
+      <p style="color:var(--muted);max-width:420px;line-height:1.7">PrepEdge needs microphone access for voice answers and speech-to-text. Please allow access when prompted by your browser.</p>
+      <button class="btn btn-primary btn-lg" onclick="requestMicPermission()">🎙️ Allow Microphone</button>
+    </div>
+
+    <!-- REGISTER MODAL -->
+    <div class="modal-overlay" id="modal-register">
+      <div class="modal">
+        <button class="xbtn" onclick="closeModal('register')">✕</button>
+        <div class="modal-title">Create Account</div>
+        <div class="modal-sub">
+          Join PrepEdge and start your preparation journey
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>First Name</label><input id="r-fn" placeholder="Rahul" />
+          </div>
+          <div class="fg">
+            <label>Last Name</label><input id="r-ln" placeholder="Sharma" />
+          </div>
+        </div>
+        <div class="fg">
+          <label>Email</label
+          ><input id="r-em" type="email" placeholder="rahul@email.com" />
+        </div>
+        <div class="frow">
+          <div class="fg">
+            <label>Course</label>
+            <select id="r-co">
+              <option>B.Tech / B.E.</option>
+              <option>M.Tech</option>
+              <option>BCA</option>
+              <option>MCA</option>
+              <option>B.Sc CS</option>
+              <option>MBA</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Target Role</label>
+            <select id="r-ro">
+              <option>Software Developer</option>
+              <option>Data Analyst</option>
+              <option>Data Scientist</option>
+              <option>Frontend Developer</option>
+              <option>Backend Developer</option>
+              <option>Full Stack Developer</option>
+              <option>DevOps Engineer</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Experience Level</label>
+          <select id="r-lv">
+            <option value="fresher">Fresher (0–1 yr)</option>
+            <option value="junior">Junior (1–3 yrs)</option>
+            <option value="mid">Mid-level (3–6 yrs)</option>
+            <option value="experienced">Experienced (6+ yrs)</option>
+          </select>
+        </div>
+        <div class="mfoot">
+          <button class="btn btn-outline" onclick="closeModal('register')">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="doRegister()">
+            Create Account →
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEEDBACK MODAL -->
+    <div class="modal-overlay" id="modal-feedback">
+      <div class="modal">
+        <button class="xbtn" onclick="closeModal('feedback')">✕</button>
+        <div class="modal-title">Your Feedback</div>
+        <div class="modal-sub">Help us improve PrepEdge for everyone</div>
+        <div class="fg">
+          <label>Rating</label>
+          <div class="stars" id="fb-stars" style="font-size: 1.5rem">
+            <span onclick="setRating(1)">☆</span
+            ><span onclick="setRating(2)">☆</span
+            ><span onclick="setRating(3)">☆</span
+            ><span onclick="setRating(4)">☆</span
+            ><span onclick="setRating(5)">☆</span>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Suggestions</label
+          ><textarea
+            id="fb-suggest"
+            style="min-height: 70px"
+            placeholder="Features you'd like to see..."
+          ></textarea>
+        </div>
+        <div class="fg">
+          <label>Your Experience</label
+          ><textarea
+            id="fb-exp"
+            style="min-height: 70px"
+            placeholder="How was your experience?"
+          ></textarea>
+        </div>
+        <div class="mfoot">
+          <button class="btn btn-outline" onclick="closeModal('feedback')">
+            Cancel
+          </button>
+          <button class="btn btn-primary" onclick="submitFeedback()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+  </body>
+</html>
