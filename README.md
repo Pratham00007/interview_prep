@@ -106,6 +106,24 @@ Track your weak spots and automatically generate more questions in those areas. 
 
 ## Screenshots
 
+<img width="1919" height="892" alt="image" src="https://github.com/user-attachments/assets/4b39a03e-73ad-4768-ac2d-c5eafa7895d7" />
+
+<img width="1919" height="886" alt="image" src="https://github.com/user-attachments/assets/061246c2-bbf3-4aba-947f-6c83156ef94c" />
+
+<img width="1919" height="880" alt="image" src="https://github.com/user-attachments/assets/3f946ed7-6f86-4f89-8ff1-06f7c8103117" />
+
+<img width="1919" height="936" alt="image" src="https://github.com/user-attachments/assets/7412f6bc-30c5-4e94-955e-38e9f5120300" />
+
+<img width="1919" height="1078" alt="image" src="https://github.com/user-attachments/assets/3219fa05-312f-4f76-821f-9ddc43ea20a7" />
+
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/2973f960-6cdb-4906-b233-d4103294b328" />
+
+<img width="1263" height="666" alt="image" src="https://github.com/user-attachments/assets/e0f9e41a-4d32-4712-a522-209e4235cdc8" />
+
+<img width="1919" height="960" alt="image" src="https://github.com/user-attachments/assets/22167974-820a-40cd-bab3-d8a99fbe224d" />
+
+<img width="1919" height="894" alt="image" src="https://github.com/user-attachments/assets/1c72d2bd-9ce5-4f25-b8d6-3a8764b1be4c" />
+
 ---
 
 ## Quick Start
